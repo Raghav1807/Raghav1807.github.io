@@ -3,12 +3,12 @@ title: "About"
 ---
 
 ## Background
-I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai.
+I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai. I have had exposure to many fields such as ML, Full Stack Development among others.
 
 ## Why Data Science
 
-I chose the field of Data Science to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them.
+I chose the field of Data Science to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them. While working at ZS, I realized that Data Engineering was just one small part of the flow and that Data Science is what makes the Data Engineering work much more useful in terms of the insights that can be presented.
 
 ## Outside of Data Science
 
-My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others
+My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. In my free time other than sports I like to go for a walk, watch any live sports available, or even binge watch through some movies/series.
