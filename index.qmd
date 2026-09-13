@@ -5,7 +5,7 @@ about:
   image: images/Copy_Photo.jpg
 ---
 
-Hi, I am a 26 year old student from Kolkata, India. I completed my Bachelors from SRM University, Chennai in 2023 with 9.48/10 GPA and worked at ZS Associates Pune as Business Technology Solutions Associate/Associate Consultant working in the Data Engineering field for 3 years before deciding to join the MDS program at UBC Vancouver. My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. My goal from the MDS course is to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them.
+Hi, I am a 26 year old student from Kolkata, India. I had completed my Bachelors from SRM University, Chennai in 2023 with 9.48/10 GPA and worked at ZS Associates Pune as Business Technology Solutions Associate/Associate Consultant working in the Data Engineering field for 3 years before deciding to join the MDS program at UBC Vancouver. My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. My goal from the MDS course is to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them.
 
 <!-- This is a Quarto website.
 
