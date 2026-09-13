@@ -1,16 +1,51 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Raghav Haralalka",
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "I had some VISA delays ongoing and had to wait for the VISA to arrive until the 2nd week of classes started. This made me fall behind a little bit and I had to do some catching up to do. I arrived on Friday 11th Sep in Vancouver and immediately started with the assignments. This resulted in my asssignment for 521 getting submitted with a delay.\n\n\n\nOrientation day on campus."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai."
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
+    "section": "",
+    "text": "I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "About",
+    "section": "Why Data Science",
+    "text": "Why Data Science\nI chose the field of Data Science to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "About",
+    "section": "Outside of Data Science",
+    "text": "Outside of Data Science\nMy hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Raghav Haralalka",
+    "section": "",
+    "text": "Hi, I am a 26 year old student from Kolkata, India. I completed my Bachelors from SRM University, Chennai in 2023 with 9.48/10 GPA and worked at ZS Associates Pune as Business Technology Solutions Associate/Associate Consultant working in the Data Engineering field for 3 years before deciding to join the MDS program at UBC Vancouver. My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. My goal from the MDS course is to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them."
   }
 ]
