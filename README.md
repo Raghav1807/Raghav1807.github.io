@@ -15,7 +15,7 @@ https://raghav1807.github.io/
 3. UV (0.12.3 or greater, I am using 0.12.7)
 4. Python (inside UV) (3.14)
 5. R (4.6.1), Rtools (For Windows) and RStudio
-6. R Packages ('jsonlite', 'tidyverse', 'renv', 'usethis', 'devtools', 'markdown', 'rmarkdown', 'languageserver', 'janitor', 'gapminder', 'readxl', "ucbds-infra/ottr", "ttimbers/canlang")
+6. R Packages ('jsonlite', 'tidyverse', 'renv', 'usethis', 'devtools', 'markdown', 'rmarkdown', 'languageserver', 'janitor', 'gapminder', 'readxl', "ucbds-infra/ottr", "ttimbers/canlang", 'knitr')
 
 #### Note: Commands Mentioned below with run on a single Git Bash session unless specified otherwise
 
@@ -50,7 +50,9 @@ uv sync
 ```{markdown}
 Open RStudio > File > Open Project > Navigate to Project Folder > Select .Rproj file > Go to Console
 ```
-Run below command in R console
+
+Run below command in **R console**
+
 ```{R console}
 renv::restore()
 ```
@@ -60,7 +62,7 @@ renv::restore()
 uv run quarto preview
 ```
 
-Ctrl + C to exit the preview
+**Ctrl + C** to exit the preview
 
 ### Step 6: Render the site (this renders the site into the docs folder where github picks it up)
 ```{git bash}
