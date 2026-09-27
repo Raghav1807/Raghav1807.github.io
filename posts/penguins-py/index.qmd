@@ -1,0 +1,82 @@
+---
+title: "Penguin Body Mass Ratio by Species (Python)"
+author: "Raghav Haralalka"
+date: 2026-09-26
+---
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER.
+
+```{python}
+#| label: setup
+#| message: false
+#| warning: false
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+from IPython.display import display
+
+penguins = sns.load_dataset("penguins")
+```
+
+```{python}
+#| label: penguins-top-10-rows
+
+display(penguins.head(10))
+```
+
+```{python}
+#| label: penguins-describe
+
+penguins.describe()
+```
+
+## Dropping out the NA's in the dataset
+
+```{python}
+#| label: clean-data-py
+
+penguins_clean = penguins.dropna(subset=["body_mass_g", "flipper_length_mm", "species", "sex"])
+
+penguins_clean.isna().sum()
+```
+
+## Some grouped analysis on the mean mass and flipper length for each species and sex.
+
+```{python}
+#| label: grouped-summary-py
+
+penguins_grouped = (
+    penguins_clean
+    .groupby(["species", "sex"])
+    .agg(
+        mean_mass=("body_mass_g", "mean"),
+        mean_flipper=("flipper_length_mm", "mean"),
+        n=("body_mass_g", "count")
+    )
+)
+
+penguins_grouped
+```
+
+## Adding a new column for Mass Ratio (Body Mass/Flipper Length)
+
+```{python}
+#| label: derived-variable-py
+
+penguins_clean["mass_ratio"] = penguins_clean["body_mass_g"] / penguins_clean["flipper_length_mm"]
+
+penguins_clean.head()
+```
+
+## Box Plot for Mass Ratio of penguins by species
+
+```{python}
+#| label: fig-penguin-mass-py
+#| fig-cap: "Mass Ratio of penguins by species."
+
+sns.boxplot(data=penguins_clean, x="species", y="mass_ratio")
+plt.xlabel("Species")
+plt.ylabel("Mass Ratio")
+plt.show()
+```

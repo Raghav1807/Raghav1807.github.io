@@ -1,0 +1,78 @@
+---
+title: "Penguin Body Mass Ratio by Species (R)"
+author: "Raghav Haralalka"
+date: 2026-09-23
+---
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER.
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
+```{r}
+#| label: penguins-top-10-rows
+
+head(penguins, 10)
+```
+
+```{r}
+#| label: penguins-summary
+
+summary(penguins)
+```
+
+## Dropping out the NA's in the dataset
+
+```{r}
+#| label: clean-data
+
+penguins_clean <- penguins %>%
+  drop_na(body_mass, flipper_len, species, sex)
+
+summary(penguins_clean)
+```
+
+## Some grouped analysis on the mean mass and flipper length for each species and sex.
+
+```{r}
+#| label: grouped-summary
+#| message: false
+
+penguins_grouped <- penguins_clean %>%
+  group_by(species, sex) %>%
+  summarise(
+    mean_mass = mean(body_mass),
+    mean_flipper = mean(flipper_len),
+    n = n()
+  )
+
+penguins_grouped
+```
+
+## Adding a new column for Mass Ratio (Body Mass/Flipper Length)
+
+```{r}
+#| label: derived-variable
+
+penguins_clean <- penguins_clean %>%
+  mutate(mass_ratio = body_mass / flipper_len)
+
+head(penguins_clean)
+```
+
+## Box Plot for Mass Ratio of penguins by species
+
+```{r}
+#| label: fig-penguin-mass-r
+#| fig-cap: "Mass Ratio of penguins by species."
+#| warning: false
+
+penguins_clean |> 
+  ggplot(aes(x = species, y = mass_ratio)) +
+  geom_boxplot() +
+  labs(x = "Species", y = "Mass Ratio")
+```

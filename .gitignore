@@ -1,0 +1,15 @@
+/.quarto/
+**/*.quarto_ipynb
+# Python-generated files
+__pycache__/
+*.py[oc]
+
+# Virtual environments
+.venv
+
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+.DS_Store

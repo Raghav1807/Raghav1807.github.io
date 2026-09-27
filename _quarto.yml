@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+  
+python:
+  path: .venv\Scripts\python.exe
+
+website:
+  title: "Raghav Haralalka"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: blog.qmd
+        text: Blog
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+
+
