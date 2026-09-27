@@ -24,7 +24,9 @@ cd <folder path>
 
 2. Get the HTTPS URL from:
 
+``` {markdown}
 Gitub Repository > Code > HTTPS > Copy the URL
+```
 
 3. Clone
 ```{git bash}
