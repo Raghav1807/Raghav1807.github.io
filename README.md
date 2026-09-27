@@ -8,12 +8,16 @@ https://raghav1807.github.io/
 
 ## Instructions to Clone and Run on PC
 
-### Step 1: Prerequisites:
+### Step 1: Prerequisites (https://ubc-mds.github.io/resources_pages/install_ds_stack_windows/#quarto-cli):
 
-1. Git, Bash
-2. Quarto CLI
-3. Python and UV
-4. R, Rtools and RStudio
+1. Git (https://git-scm.com/download/win), Git Bash (Enabled as default on Terminal)
+2. Quarto CLI (1.10.3 or greater, I am using 1.10.18)
+3. UV (0.12.3 or greater, I am using 0.12.7)
+4. Python (inside UV) (3.14)
+5. R (4.6.1), Rtools (For Windows) and RStudio
+6. R Packages ('jsonlite', 'tidyverse', 'renv', 'usethis', 'devtools', 'markdown', 'rmarkdown', 'languageserver', 'janitor', 'gapminder', 'readxl', "ucbds-infra/ottr", "ttimbers/canlang")
+
+#### Note: Commands Mentioned below with run on Git Bash
 
 ### Step 2: Clone the Repository
 
@@ -23,12 +27,53 @@ cd <folder path>
 ```
 
 2. Get the HTTPS URL from:
-
 ``` {markdown}
-Gitub Repository > Code > HTTPS > Copy the URL
+Gitub Repository > Code > Local > HTTPS > Copy the URL
 ```
 
 3. Clone
 ```{git bash}
 git clone <HTTPS URL>
+```
+
+4. Navigate to the folder
+```{git bash}
+cd Raghav1807.github.io
+```
+
+### Step 3: Sync the UV environment to create the Virtual Environment
+```{git bash}
+uv sync
+```
+
+### Step 4: Sync R Packages
+```{markdown}
+Open RStudio > File > Open Project > Navigate to Project Folder > Select .Rproj file > Go to Console
+```
+Run below command in R console
+```{R console}
+renv::restore()
+```
+
+### Step 4: Preview the site
+```{git bash}
+uv run quarto preview
+```
+
+Ctrl + C to exit the preview
+
+### Step 5: Render the site (this renders the site into the docs folder where github picks it up)
+```{git bash}
+uv run quarto render
+```
+
+### (for the owner of this github only) Step 6: Push to Github
+```{git bash}
+git add --all
+```
+```{git bash}
+git commit -m "<Commit Message>"
+```
+```{git bash}
+git push origin main
 ```
