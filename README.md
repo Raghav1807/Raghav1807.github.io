@@ -8,7 +8,7 @@ https://raghav1807.github.io/
 
 ## Instructions to Clone and Run on PC
 
-### Step 1: Prerequisites (https://ubc-mds.github.io/resources_pages/install_ds_stack_windows/#quarto-cli):
+### Step 1: Prerequisites (https://ubc-mds.github.io/resources_pages/install_ds_stack_windows/):
 
 1. Git (https://git-scm.com/download/win), Git Bash (Enabled as default on Terminal)
 2. Quarto CLI (1.10.3 or greater, I am using 1.10.18)
@@ -17,7 +17,7 @@ https://raghav1807.github.io/
 5. R (4.6.1), Rtools (For Windows) and RStudio
 6. R Packages ('jsonlite', 'tidyverse', 'renv', 'usethis', 'devtools', 'markdown', 'rmarkdown', 'languageserver', 'janitor', 'gapminder', 'readxl', "ucbds-infra/ottr", "ttimbers/canlang")
 
-#### Note: Commands Mentioned below with run on Git Bash
+#### Note: Commands Mentioned below with run on a single Git Bash session unless specified otherwise
 
 ### Step 2: Clone the Repository
 
@@ -55,19 +55,19 @@ Run below command in R console
 renv::restore()
 ```
 
-### Step 4: Preview the site
+### Step 5: Preview the site
 ```{git bash}
 uv run quarto preview
 ```
 
 Ctrl + C to exit the preview
 
-### Step 5: Render the site (this renders the site into the docs folder where github picks it up)
+### Step 6: Render the site (this renders the site into the docs folder where github picks it up)
 ```{git bash}
 uv run quarto render
 ```
 
-### (for the owner of this github only) Step 6: Push to Github
+### (Only for Owner) Step 7: Push to Github after changes
 ```{git bash}
 git add --all
 ```
