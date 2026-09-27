@@ -30,7 +30,7 @@ summary(penguins)
 ```{r}
 #| label: clean-data
 
-penguins_clean <- penguins %>%
+penguins_clean <- penguins |> 
   drop_na(body_mass, flipper_len, species, sex)
 
 summary(penguins_clean)
@@ -42,8 +42,8 @@ summary(penguins_clean)
 #| label: grouped-summary
 #| message: false
 
-penguins_grouped <- penguins_clean %>%
-  group_by(species, sex) %>%
+penguins_grouped <- penguins_clean |> 
+  group_by(species, sex) |> 
   summarise(
     mean_mass = mean(body_mass),
     mean_flipper = mean(flipper_len),
@@ -58,7 +58,7 @@ penguins_grouped
 ```{r}
 #| label: derived-variable
 
-penguins_clean <- penguins_clean %>%
+penguins_clean <- penguins_clean |> 
   mutate(mass_ratio = body_mass / flipper_len)
 
 head(penguins_clean)

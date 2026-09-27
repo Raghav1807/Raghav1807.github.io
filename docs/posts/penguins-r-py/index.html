@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Raghav Haralalka">
-<meta name="dcterms.date" content="2026-09-25">
+<meta name="dcterms.date" content="2026-09-26">
 
-<title>Penguin Body Mass Ratio by Species (Python) – Raghav Haralalka</title>
+<title>Penguin Body Mass Ratio by Species (R and Python) – Raghav Haralalka</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -110,12 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -166,10 +160,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dropping-out-the-nas-in-the-dataset" id="toc-dropping-out-the-nas-in-the-dataset" class="nav-link active" data-scroll-target="#dropping-out-the-nas-in-the-dataset">Dropping out the NA’s in the dataset</a></li>
-  <li><a href="#some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex." id="toc-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex." class="nav-link" data-scroll-target="#some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.">Some grouped analysis on the mean mass and flipper length for each species and sex.</a></li>
-  <li><a href="#adding-a-new-column-for-mass-ratio-body-massflipper-length" id="toc-adding-a-new-column-for-mass-ratio-body-massflipper-length" class="nav-link" data-scroll-target="#adding-a-new-column-for-mass-ratio-body-massflipper-length">Adding a new column for Mass Ratio (Body Mass/Flipper Length)</a></li>
-  <li><a href="#box-plot-for-mass-ratio-of-penguins-by-species" id="toc-box-plot-for-mass-ratio-of-penguins-by-species" class="nav-link" data-scroll-target="#box-plot-for-mass-ratio-of-penguins-by-species">Box Plot for Mass Ratio of penguins by species</a></li>
+  <li><a href="#load-r-libraries" id="toc-load-r-libraries" class="nav-link active" data-scroll-target="#load-r-libraries">Load R Libraries</a></li>
+  <li><a href="#load-python-libraries" id="toc-load-python-libraries" class="nav-link" data-scroll-target="#load-python-libraries">Load Python Libraries</a></li>
+  <li><a href="#r-dropping-out-the-nas-in-the-dataset" id="toc-r-dropping-out-the-nas-in-the-dataset" class="nav-link" data-scroll-target="#r-dropping-out-the-nas-in-the-dataset">[R] Dropping out the NA’s in the dataset</a></li>
+  <li><a href="#python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex." id="toc-python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex." class="nav-link" data-scroll-target="#python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.">[Python] Some grouped analysis on the mean mass and flipper length for each species and sex.</a></li>
+  <li><a href="#python-adding-a-new-column-for-mass-ratio-body-massflipper-length" id="toc-python-adding-a-new-column-for-mass-ratio-body-massflipper-length" class="nav-link" data-scroll-target="#python-adding-a-new-column-for-mass-ratio-body-massflipper-length">[Python] Adding a new column for Mass Ratio (Body Mass/Flipper Length)</a></li>
+  <li><a href="#r-box-plot-for-mass-ratio-of-penguins-by-species" id="toc-r-box-plot-for-mass-ratio-of-penguins-by-species" class="nav-link" data-scroll-target="#r-box-plot-for-mass-ratio-of-penguins-by-species">[R] Box Plot for Mass Ratio of penguins by species</a></li>
   </ul>
 </nav>
     </div>
@@ -178,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Penguin Body Mass Ratio by Species (Python)</h1>
+<h1 class="title">Penguin Body Mass Ratio by Species (R and Python)</h1>
 </div>
 
 
@@ -195,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 25, 2026</p>
+      <p class="date">September 26, 2026</p>
     </div>
   </div>
   
@@ -208,420 +204,158 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Data: <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, Palmer Station Antarctica LTER.</p>
-<div id="setup" class="cell" data-message="false" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="load-r-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="load-r-libraries">Load R Libraries</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-penguins-top-10-rows" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>display(penguins.head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="penguins-top-10-rows" class="cell-output cell-output-display">
-<div>
+</section>
+<section id="load-python-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="load-python-libraries">Load Python Libraries</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">py_config</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>python:         C:/Users/RAGHAV/mds/521/milestone_2/Raghav1807.github.io/.venv/Scripts/python.exe
+libpython:      C:/Users/RAGHAV/AppData/Roaming/uv/python/cpython-3.14.7-windows-x86_64-none/python314.dll
+pythonhome:     C:/Users/RAGHAV/mds/521/milestone_2/Raghav1807.github.io/.venv
+virtualenv:     C:/Users/RAGHAV/mds/521/milestone_2/Raghav1807.github.io/.venv/Scripts/activate_this.py
+version:        3.14.7 (main, Aug 25 2026, 14:01:25) [MSC v.1944 64 bit (AMD64)]
+Architecture:   64bit
+numpy:          C:/Users/RAGHAV/mds/521/milestone_2/Raghav1807.github.io/.venv/Lib/site-packages/numpy
+numpy_version:  2.5.3
 
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">species</th>
-<th data-quarto-table-cell-role="th">island</th>
-<th data-quarto-table-cell-role="th">bill_length_mm</th>
-<th data-quarto-table-cell-role="th">bill_depth_mm</th>
-<th data-quarto-table-cell-role="th">flipper_length_mm</th>
-<th data-quarto-table-cell-role="th">body_mass_g</th>
-<th data-quarto-table-cell-role="th">sex</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.1</td>
-<td>18.7</td>
-<td>181.0</td>
-<td>3750.0</td>
-<td>Male</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.5</td>
-<td>17.4</td>
-<td>186.0</td>
-<td>3800.0</td>
-<td>Female</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>40.3</td>
-<td>18.0</td>
-<td>195.0</td>
-<td>3250.0</td>
-<td>Female</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>36.7</td>
-<td>19.3</td>
-<td>193.0</td>
-<td>3450.0</td>
-<td>Female</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">5</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.3</td>
-<td>20.6</td>
-<td>190.0</td>
-<td>3650.0</td>
-<td>Male</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">6</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>38.9</td>
-<td>17.8</td>
-<td>181.0</td>
-<td>3625.0</td>
-<td>Female</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">7</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.2</td>
-<td>19.6</td>
-<td>195.0</td>
-<td>4675.0</td>
-<td>Male</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">8</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>34.1</td>
-<td>18.1</td>
-<td>193.0</td>
-<td>3475.0</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">9</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>42.0</td>
-<td>20.2</td>
-<td>190.0</td>
-<td>4250.0</td>
-<td>NaN</td>
-</tr>
-</tbody>
-</table>
-
+NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
 </div>
 </div>
-</div>
-<div id="cell-penguins-describe" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="penguins-describe" class="cell-output cell-output-display" data-execution_count="3">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">bill_length_mm</th>
-<th data-quarto-table-cell-role="th">bill_depth_mm</th>
-<th data-quarto-table-cell-role="th">flipper_length_mm</th>
-<th data-quarto-table-cell-role="th">body_mass_g</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">count</th>
-<td>342.000000</td>
-<td>342.000000</td>
-<td>342.000000</td>
-<td>342.000000</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">mean</th>
-<td>43.921930</td>
-<td>17.151170</td>
-<td>200.915205</td>
-<td>4201.754386</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">std</th>
-<td>5.459584</td>
-<td>1.974793</td>
-<td>14.061714</td>
-<td>801.954536</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">min</th>
-<td>32.100000</td>
-<td>13.100000</td>
-<td>172.000000</td>
-<td>2700.000000</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">25%</th>
-<td>39.225000</td>
-<td>15.600000</td>
-<td>190.000000</td>
-<td>3550.000000</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">50%</th>
-<td>44.450000</td>
-<td>17.300000</td>
-<td>197.000000</td>
-<td>4050.000000</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">75%</th>
-<td>48.500000</td>
-<td>18.700000</td>
-<td>213.000000</td>
-<td>4750.000000</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">max</th>
-<td>59.600000</td>
-<td>21.500000</td>
-<td>231.000000</td>
-<td>6300.000000</td>
-</tr>
-</tbody>
-</table>
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species    island bill_len bill_dep flipper_len body_mass    sex year
+1   Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2   Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3   Adelie Torgersen     40.3     18.0         195      3250 female 2007
+4   Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5   Adelie Torgersen     36.7     19.3         193      3450 female 2007
+6   Adelie Torgersen     39.3     20.6         190      3650   male 2007
+7   Adelie Torgersen     38.9     17.8         181      3625 female 2007
+8   Adelie Torgersen     39.2     19.6         195      4675   male 2007
+9   Adelie Torgersen     34.1     18.1         193      3475   &lt;NA&gt; 2007
+10  Adelie Torgersen     42.0     20.2         190      4250   &lt;NA&gt; 2007</code></pre>
 </div>
 </div>
-</div>
-<section id="dropping-out-the-nas-in-the-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="dropping-out-the-nas-in-the-dataset">Dropping out the NA’s in the dataset</h2>
-<div id="cell-clean-data-py" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins_clean <span class="op">=</span> penguins.dropna(subset<span class="op">=</span>[<span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"species"</span>, <span class="st">"sex"</span>])</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>penguins_clean.isna().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="clean-data-py" class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>species              0
-island               0
-bill_length_mm       0
-bill_depth_mm        0
-flipper_length_mm    0
-body_mass_g          0
-sex                  0
-dtype: int64</code></pre>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      species          island       bill_len        bill_dep    
+ Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+ Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+ Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+                                 Mean   :43.92   Mean   :17.15  
+                                 3rd Qu.:48.50   3rd Qu.:18.70  
+                                 Max.   :59.60   Max.   :21.50  
+                                 NAs    :2       NAs    :2      
+  flipper_len      body_mass        sex           year     
+ Min.   :172.0   Min.   :2700   female:165   Min.   :2007  
+ 1st Qu.:190.0   1st Qu.:3550   male  :168   1st Qu.:2007  
+ Median :197.0   Median :4050   NAs   : 11   Median :2008  
+ Mean   :200.9   Mean   :4202                Mean   :2008  
+ 3rd Qu.:213.0   3rd Qu.:4750                3rd Qu.:2009  
+ Max.   :231.0   Max.   :6300                Max.   :2009  
+ NAs    :2       NAs    :2                                 </code></pre>
 </div>
 </div>
 </section>
-<section id="some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex." class="level2">
-<h2 class="anchored" data-anchor-id="some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.">Some grouped analysis on the mean mass and flipper length for each species and sex.</h2>
-<div id="cell-grouped-summary-py" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins_grouped <span class="op">=</span> (</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    penguins_clean</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"species"</span>, <span class="st">"sex"</span>])</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        mean_mass<span class="op">=</span>(<span class="st">"body_mass_g"</span>, <span class="st">"mean"</span>),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        mean_flipper<span class="op">=</span>(<span class="st">"flipper_length_mm"</span>, <span class="st">"mean"</span>),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        n<span class="op">=</span>(<span class="st">"body_mass_g"</span>, <span class="st">"count"</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>penguins_grouped</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="grouped-summary-py" class="cell-output cell-output-display" data-execution_count="5">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mean_mass</th>
-<th data-quarto-table-cell-role="th">mean_flipper</th>
-<th data-quarto-table-cell-role="th">n</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">species</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Adelie</th>
-<th data-quarto-table-cell-role="th">Female</th>
-<td>3368.835616</td>
-<td>187.794521</td>
-<td>73</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Male</th>
-<td>4043.493151</td>
-<td>192.410959</td>
-<td>73</td>
-</tr>
-<tr class="odd">
-<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Chinstrap</th>
-<th data-quarto-table-cell-role="th">Female</th>
-<td>3527.205882</td>
-<td>191.735294</td>
-<td>34</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Male</th>
-<td>3938.970588</td>
-<td>199.911765</td>
-<td>34</td>
-</tr>
-<tr class="odd">
-<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Gentoo</th>
-<th data-quarto-table-cell-role="th">Female</th>
-<td>4679.741379</td>
-<td>212.706897</td>
-<td>58</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Male</th>
-<td>5484.836066</td>
-<td>221.540984</td>
-<td>61</td>
-</tr>
-</tbody>
-</table>
-
-</div>
+<section id="r-dropping-out-the-nas-in-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="r-dropping-out-the-nas-in-the-dataset">[R] Dropping out the NA’s in the dataset</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>penguins_clean <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(body_mass, flipper_len, species, sex)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      species          island       bill_len        bill_dep      flipper_len 
+ Adelie   :146   Biscoe   :163   Min.   :32.10   Min.   :13.10   Min.   :172  
+ Chinstrap: 68   Dream    :123   1st Qu.:39.50   1st Qu.:15.60   1st Qu.:190  
+ Gentoo   :119   Torgersen: 47   Median :44.50   Median :17.30   Median :197  
+                                 Mean   :43.99   Mean   :17.16   Mean   :201  
+                                 3rd Qu.:48.60   3rd Qu.:18.70   3rd Qu.:213  
+                                 Max.   :59.60   Max.   :21.50   Max.   :231  
+   body_mass        sex           year     
+ Min.   :2700   female:165   Min.   :2007  
+ 1st Qu.:3550   male  :168   1st Qu.:2007  
+ Median :4050                Median :2008  
+ Mean   :4207                Mean   :2008  
+ 3rd Qu.:4775                3rd Qu.:2009  
+ Max.   :6300                Max.   :2009  </code></pre>
 </div>
 </div>
 </section>
-<section id="adding-a-new-column-for-mass-ratio-body-massflipper-length" class="level2">
-<h2 class="anchored" data-anchor-id="adding-a-new-column-for-mass-ratio-body-massflipper-length">Adding a new column for Mass Ratio (Body Mass/Flipper Length)</h2>
-<div id="cell-derived-variable-py" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins_clean[<span class="st">"mass_ratio"</span>] <span class="op">=</span> penguins_clean[<span class="st">"body_mass_g"</span>] <span class="op">/</span> penguins_clean[<span class="st">"flipper_length_mm"</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>penguins_clean.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="derived-variable-py" class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">species</th>
-<th data-quarto-table-cell-role="th">island</th>
-<th data-quarto-table-cell-role="th">bill_length_mm</th>
-<th data-quarto-table-cell-role="th">bill_depth_mm</th>
-<th data-quarto-table-cell-role="th">flipper_length_mm</th>
-<th data-quarto-table-cell-role="th">body_mass_g</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th">mass_ratio</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.1</td>
-<td>18.7</td>
-<td>181.0</td>
-<td>3750.0</td>
-<td>Male</td>
-<td>20.718232</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.5</td>
-<td>17.4</td>
-<td>186.0</td>
-<td>3800.0</td>
-<td>Female</td>
-<td>20.430108</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>40.3</td>
-<td>18.0</td>
-<td>195.0</td>
-<td>3250.0</td>
-<td>Female</td>
-<td>16.666667</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">4</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>36.7</td>
-<td>19.3</td>
-<td>193.0</td>
-<td>3450.0</td>
-<td>Female</td>
-<td>17.875648</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">5</th>
-<td>Adelie</td>
-<td>Torgersen</td>
-<td>39.3</td>
-<td>20.6</td>
-<td>190.0</td>
-<td>3650.0</td>
-<td>Male</td>
-<td>19.210526</td>
-</tr>
-</tbody>
-</table>
-
-</div>
+<section id="python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex." class="level2">
+<h2 class="anchored" data-anchor-id="python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.">[Python] Some grouped analysis on the mean mass and flipper length for each species and sex.</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>penguins_grouped <span class="op">=</span> (</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    r.penguins_clean</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"species"</span>, <span class="st">"sex"</span>])</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        mean_mass<span class="op">=</span>(<span class="st">"body_mass"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        mean_flipper<span class="op">=</span>(<span class="st">"flipper_len"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        n<span class="op">=</span>(<span class="st">"body_mass"</span>, <span class="st">"count"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>penguins_grouped</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    mean_mass  mean_flipper   n
+species   sex                                  
+Adelie    female  3368.835616    187.794521  73
+          male    4043.493151    192.410959  73
+Chinstrap female  3527.205882    191.735294  34
+          male    3938.970588    199.911765  34
+Gentoo    female  4679.741379    212.706897  58
+          male    5484.836066    221.540984  61</code></pre>
 </div>
 </div>
 </section>
-<section id="box-plot-for-mass-ratio-of-penguins-by-species" class="level2">
-<h2 class="anchored" data-anchor-id="box-plot-for-mass-ratio-of-penguins-by-species">Box Plot for Mass Ratio of penguins by species</h2>
-<div id="cell-fig-penguin-mass-py" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>penguins_clean, x<span class="op">=</span><span class="st">"species"</span>, y<span class="op">=</span><span class="st">"mass_ratio"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Species"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Mass Ratio"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div id="fig-penguin-mass-py" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="python-adding-a-new-column-for-mass-ratio-body-massflipper-length" class="level2">
+<h2 class="anchored" data-anchor-id="python-adding-a-new-column-for-mass-ratio-body-massflipper-length">[Python] Adding a new column for Mass Ratio (Body Mass/Flipper Length)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>penguins_py <span class="op">=</span> r.penguins_clean.copy()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>penguins_py[<span class="st">"mass_ratio"</span>] <span class="op">=</span> penguins_py[<span class="st">"body_mass"</span>] <span class="op">/</span> penguins_py[<span class="st">"flipper_len"</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>penguins_py.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species     island  bill_len  bill_dep  ...  body_mass     sex  year  mass_ratio
+0  Adelie  Torgersen      39.1      18.7  ...       3750    male  2007   20.718232
+1  Adelie  Torgersen      39.5      17.4  ...       3800  female  2007   20.430108
+2  Adelie  Torgersen      40.3      18.0  ...       3250  female  2007   16.666667
+3  Adelie  Torgersen      36.7      19.3  ...       3450  female  2007   17.875648
+4  Adelie  Torgersen      39.3      20.6  ...       3650    male  2007   19.210526
+
+[5 rows x 9 columns]</code></pre>
+</div>
+</div>
+</section>
+<section id="r-box-plot-for-mass-ratio-of-penguins-by-species" class="level2">
+<h2 class="anchored" data-anchor-id="r-box-plot-for-mass-ratio-of-penguins-by-species">[R] Box Plot for Mass Ratio of penguins by species</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>py<span class="sc">$</span>penguins_py <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> mass_ratio)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Species"</span>, <span class="at">y =</span> <span class="st">"Mass Ratio"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-penguin-mass-r" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-penguin-mass-py-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-penguin-mass-py-output-1.png" width="585" height="431" class="figure-img">
+<div aria-describedby="fig-penguin-mass-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-penguin-mass-r-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-penguin-mass-py-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-penguin-mass-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Mass Ratio of penguins by species.
 </figcaption>
 </figure>

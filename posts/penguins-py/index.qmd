@@ -1,7 +1,7 @@
 ---
 title: "Penguin Body Mass Ratio by Species (Python)"
 author: "Raghav Haralalka"
-date: 2026-09-26
+date: 2026-09-25
 ---
 
 Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER.

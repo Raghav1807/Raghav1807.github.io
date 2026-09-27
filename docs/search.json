@@ -1,89 +1,5 @@
 [
   {
-    "objectID": "posts/penguins-r/index.html",
-    "href": "posts/penguins-r/index.html",
-    "title": "Penguin Body Mass Ratio by Species (R)",
-    "section": "",
-    "text": "Data: Palmer Penguins, Palmer Station Antarctica LTER.\nlibrary(tidyverse)\nhead(penguins, 10)\n\n   species    island bill_len bill_dep flipper_len body_mass    sex year\n1   Adelie Torgersen     39.1     18.7         181      3750   male 2007\n2   Adelie Torgersen     39.5     17.4         186      3800 female 2007\n3   Adelie Torgersen     40.3     18.0         195      3250 female 2007\n4   Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007\n5   Adelie Torgersen     36.7     19.3         193      3450 female 2007\n6   Adelie Torgersen     39.3     20.6         190      3650   male 2007\n7   Adelie Torgersen     38.9     17.8         181      3625 female 2007\n8   Adelie Torgersen     39.2     19.6         195      4675   male 2007\n9   Adelie Torgersen     34.1     18.1         193      3475   &lt;NA&gt; 2007\n10  Adelie Torgersen     42.0     20.2         190      4250   &lt;NA&gt; 2007\nsummary(penguins)\n\n      species          island       bill_len        bill_dep    \n Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  \n Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  \n Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  \n                                 Mean   :43.92   Mean   :17.15  \n                                 3rd Qu.:48.50   3rd Qu.:18.70  \n                                 Max.   :59.60   Max.   :21.50  \n                                 NAs    :2       NAs    :2      \n  flipper_len      body_mass        sex           year     \n Min.   :172.0   Min.   :2700   female:165   Min.   :2007  \n 1st Qu.:190.0   1st Qu.:3550   male  :168   1st Qu.:2007  \n Median :197.0   Median :4050   NAs   : 11   Median :2008  \n Mean   :200.9   Mean   :4202                Mean   :2008  \n 3rd Qu.:213.0   3rd Qu.:4750                3rd Qu.:2009  \n Max.   :231.0   Max.   :6300                Max.   :2009  \n NAs    :2       NAs    :2"
-  },
-  {
-    "objectID": "posts/penguins-r/index.html#dropping-out-the-nas-in-the-dataset",
-    "href": "posts/penguins-r/index.html#dropping-out-the-nas-in-the-dataset",
-    "title": "Penguin Body Mass Ratio by Species (R)",
-    "section": "Dropping out the NA’s in the dataset",
-    "text": "Dropping out the NA’s in the dataset\n\npenguins_clean &lt;- penguins %&gt;%\n  drop_na(body_mass, flipper_len, species, sex)\n\nsummary(penguins_clean)\n\n      species          island       bill_len        bill_dep      flipper_len \n Adelie   :146   Biscoe   :163   Min.   :32.10   Min.   :13.10   Min.   :172  \n Chinstrap: 68   Dream    :123   1st Qu.:39.50   1st Qu.:15.60   1st Qu.:190  \n Gentoo   :119   Torgersen: 47   Median :44.50   Median :17.30   Median :197  \n                                 Mean   :43.99   Mean   :17.16   Mean   :201  \n                                 3rd Qu.:48.60   3rd Qu.:18.70   3rd Qu.:213  \n                                 Max.   :59.60   Max.   :21.50   Max.   :231  \n   body_mass        sex           year     \n Min.   :2700   female:165   Min.   :2007  \n 1st Qu.:3550   male  :168   1st Qu.:2007  \n Median :4050                Median :2008  \n Mean   :4207                Mean   :2008  \n 3rd Qu.:4775                3rd Qu.:2009  \n Max.   :6300                Max.   :2009"
-  },
-  {
-    "objectID": "posts/penguins-r/index.html#some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.",
-    "href": "posts/penguins-r/index.html#some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.",
-    "title": "Penguin Body Mass Ratio by Species (R)",
-    "section": "Some grouped analysis on the mean mass and flipper length for each species and sex.",
-    "text": "Some grouped analysis on the mean mass and flipper length for each species and sex.\n\npenguins_grouped &lt;- penguins_clean %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    mean_mass = mean(body_mass),\n    mean_flipper = mean(flipper_len),\n    n = n()\n  )\n\npenguins_grouped\n\n# A tibble: 6 × 5\n# Groups:   species [3]\n  species   sex    mean_mass mean_flipper     n\n  &lt;fct&gt;     &lt;fct&gt;      &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;\n1 Adelie    female     3369.         188.    73\n2 Adelie    male       4043.         192.    73\n3 Chinstrap female     3527.         192.    34\n4 Chinstrap male       3939.         200.    34\n5 Gentoo    female     4680.         213.    58\n6 Gentoo    male       5485.         222.    61"
-  },
-  {
-    "objectID": "posts/penguins-r/index.html#adding-a-new-column-for-mass-ratio-body-massflipper-length",
-    "href": "posts/penguins-r/index.html#adding-a-new-column-for-mass-ratio-body-massflipper-length",
-    "title": "Penguin Body Mass Ratio by Species (R)",
-    "section": "Adding a new column for Mass Ratio (Body Mass/Flipper Length)",
-    "text": "Adding a new column for Mass Ratio (Body Mass/Flipper Length)\n\npenguins_clean &lt;- penguins_clean %&gt;%\n  mutate(mass_ratio = body_mass / flipper_len)\n\nhead(penguins_clean)\n\n  species    island bill_len bill_dep flipper_len body_mass    sex year\n1  Adelie Torgersen     39.1     18.7         181      3750   male 2007\n2  Adelie Torgersen     39.5     17.4         186      3800 female 2007\n3  Adelie Torgersen     40.3     18.0         195      3250 female 2007\n4  Adelie Torgersen     36.7     19.3         193      3450 female 2007\n5  Adelie Torgersen     39.3     20.6         190      3650   male 2007\n6  Adelie Torgersen     38.9     17.8         181      3625 female 2007\n  mass_ratio\n1   20.71823\n2   20.43011\n3   16.66667\n4   17.87565\n5   19.21053\n6   20.02762"
-  },
-  {
-    "objectID": "posts/penguins-r/index.html#box-plot-for-mass-ratio-of-penguins-by-species",
-    "href": "posts/penguins-r/index.html#box-plot-for-mass-ratio-of-penguins-by-species",
-    "title": "Penguin Body Mass Ratio by Species (R)",
-    "section": "Box Plot for Mass Ratio of penguins by species",
-    "text": "Box Plot for Mass Ratio of penguins by species\n\npenguins_clean |&gt; \n  ggplot(aes(x = species, y = mass_ratio)) +\n  geom_boxplot() +\n  labs(x = \"Species\", y = \"Mass Ratio\")\n\n\n\n\n\n\n\nFigure 1: Mass Ratio of penguins by species."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html",
-    "href": "posts/first-weeks/index.html",
-    "title": "My first weeks in MDS",
-    "section": "",
-    "text": "To be honest, I didn’t even have a proper first few weeks in MDS. Mainly due to VISA delays from getting the approval to geting the VISA stamped and thus, arriving late.\nWhile at home waiting for the VISA, I had coordinated with the Professors to get an idea of what I need to do to stay in track for completing the course on time. By doing this I could complete the week 1 assignments on time.\nWhen week 2 arrived, I had just got the approval of my VISA and could travel as soon as I get back the stamped passport. This happened on Wednesday and I reached campus on Friday. Once I arrived, I immediately started working on the assignments but since I couldn’t attend any of the lectures, it took me some time to get accustomed to the week 2 concepts of 523, 511 and 551 due to which I took a lot of time to complete them even with the help of lecture notes and some use of AI.\nOverall, I am happy I finally made it here and can now go with the flow rather than playing catch up.\n\n\n\nOrientation day on campus."
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Penguin Body Mass Ratio by Species (Python)\n\n\n\n\n\n\n\n\nSep 26, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin Body Mass Ratio by Species (R)\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai. I have had exposure to many fields such as ML, Full Stack Development among others."
-  },
-  {
-    "objectID": "about.html#background",
-    "href": "about.html#background",
-    "title": "About",
-    "section": "",
-    "text": "I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai. I have had exposure to many fields such as ML, Full Stack Development among others."
-  },
-  {
-    "objectID": "about.html#why-data-science",
-    "href": "about.html#why-data-science",
-    "title": "About",
-    "section": "Why Data Science",
-    "text": "Why Data Science\nI chose the field of Data Science to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them. While working at ZS, I realized that Data Engineering was just one small part of the flow and that Data Science is what makes the Data Engineering work much more useful in terms of the insights that can be presented."
-  },
-  {
-    "objectID": "about.html#outside-of-data-science",
-    "href": "about.html#outside-of-data-science",
-    "title": "About",
-    "section": "Outside of Data Science",
-    "text": "Outside of Data Science\nMy hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. In my free time other than sports I like to go for a walk, watch any live sports available, or even binge watch through some movies/series."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Raghav Haralalka",
-    "section": "",
-    "text": "Hi, I am a 26 year old student from Kolkata, India. I had completed my Bachelors from SRM University, Chennai in 2023 with 9.48/10 GPA and worked at ZS Associates Pune as Business Technology Solutions Associate/Associate Consultant working in the Data Engineering field for 3 years before deciding to join the MDS program at UBC Vancouver. My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. My goal from the MDS course is to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them."
-  },
-  {
     "objectID": "posts/penguins-py/index.html",
     "href": "posts/penguins-py/index.html",
     "title": "Penguin Body Mass Ratio by Species (Python)",
@@ -117,5 +33,124 @@
     "title": "Penguin Body Mass Ratio by Species (Python)",
     "section": "Box Plot for Mass Ratio of penguins by species",
     "text": "Box Plot for Mass Ratio of penguins by species\n\nsns.boxplot(data=penguins_clean, x=\"species\", y=\"mass_ratio\")\nplt.xlabel(\"Species\")\nplt.ylabel(\"Mass Ratio\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Mass Ratio of penguins by species."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Raghav Haralalka",
+    "section": "",
+    "text": "Hi, I am a 26 year old student from Kolkata, India. I had completed my Bachelors from SRM University, Chennai in 2023 with 9.48/10 GPA and worked at ZS Associates Pune as Business Technology Solutions Associate/Associate Consultant working in the Data Engineering field for 3 years before deciding to join the MDS program at UBC Vancouver. My hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. My goal from the MDS course is to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai. I have had exposure to many fields such as ML, Full Stack Development among others."
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "About",
+    "section": "",
+    "text": "I have worked at ZS Associates as a Business Technology Solutions Associate Consultant for 3 years primarily working on the Data Engineering field. My current qualification is BTech in Computer Science and Engineering from SRM Chennai. I have had exposure to many fields such as ML, Full Stack Development among others."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "About",
+    "section": "Why Data Science",
+    "text": "Why Data Science\nI chose the field of Data Science to create impact especially in the field of sports where the amount of data coming in is already very huge and has potential to transform all of them. While working at ZS, I realized that Data Engineering was just one small part of the flow and that Data Science is what makes the Data Engineering work much more useful in terms of the insights that can be presented."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "About",
+    "section": "Outside of Data Science",
+    "text": "Outside of Data Science\nMy hobbies include going on a drive, watching sports/movies and playing sports such as table tennis, lawn tennis and badminton among others. In my free time other than sports I like to go for a walk, watch any live sports available, or even binge watch through some movies/series."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Penguin Body Mass Ratio by Species (R and Python)\n\n\n\n\n\n\n\n\nSep 26, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin Body Mass Ratio by Species (Python)\n\n\n\n\n\n\n\n\nSep 25, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin Body Mass Ratio by Species (R)\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 13, 2026\n\n\nRaghav Haralalka\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "To be honest, I didn’t even have a proper first few weeks in MDS. Mainly due to VISA delays from getting the approval to geting the VISA stamped and thus, arriving late.\nWhile at home waiting for the VISA, I had coordinated with the Professors to get an idea of what I need to do to stay in track for completing the course on time. By doing this I could complete the week 1 assignments on time.\nWhen week 2 arrived, I had just got the approval of my VISA and could travel as soon as I get back the stamped passport. This happened on Wednesday and I reached campus on Friday. Once I arrived, I immediately started working on the assignments but since I couldn’t attend any of the lectures, it took me some time to get accustomed to the week 2 concepts of 523, 511 and 551 due to which I took a lot of time to complete them even with the help of lecture notes and some use of AI.\nOverall, I am happy I finally made it here and can now go with the flow rather than playing catch up.\n\n\n\nOrientation day on campus."
+  },
+  {
+    "objectID": "posts/penguins-r/index.html",
+    "href": "posts/penguins-r/index.html",
+    "title": "Penguin Body Mass Ratio by Species (R)",
+    "section": "",
+    "text": "Data: Palmer Penguins, Palmer Station Antarctica LTER.\nlibrary(tidyverse)\nhead(penguins, 10)\n\n   species    island bill_len bill_dep flipper_len body_mass    sex year\n1   Adelie Torgersen     39.1     18.7         181      3750   male 2007\n2   Adelie Torgersen     39.5     17.4         186      3800 female 2007\n3   Adelie Torgersen     40.3     18.0         195      3250 female 2007\n4   Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007\n5   Adelie Torgersen     36.7     19.3         193      3450 female 2007\n6   Adelie Torgersen     39.3     20.6         190      3650   male 2007\n7   Adelie Torgersen     38.9     17.8         181      3625 female 2007\n8   Adelie Torgersen     39.2     19.6         195      4675   male 2007\n9   Adelie Torgersen     34.1     18.1         193      3475   &lt;NA&gt; 2007\n10  Adelie Torgersen     42.0     20.2         190      4250   &lt;NA&gt; 2007\nsummary(penguins)\n\n      species          island       bill_len        bill_dep    \n Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  \n Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  \n Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  \n                                 Mean   :43.92   Mean   :17.15  \n                                 3rd Qu.:48.50   3rd Qu.:18.70  \n                                 Max.   :59.60   Max.   :21.50  \n                                 NAs    :2       NAs    :2      \n  flipper_len      body_mass        sex           year     \n Min.   :172.0   Min.   :2700   female:165   Min.   :2007  \n 1st Qu.:190.0   1st Qu.:3550   male  :168   1st Qu.:2007  \n Median :197.0   Median :4050   NAs   : 11   Median :2008  \n Mean   :200.9   Mean   :4202                Mean   :2008  \n 3rd Qu.:213.0   3rd Qu.:4750                3rd Qu.:2009  \n Max.   :231.0   Max.   :6300                Max.   :2009  \n NAs    :2       NAs    :2"
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#dropping-out-the-nas-in-the-dataset",
+    "href": "posts/penguins-r/index.html#dropping-out-the-nas-in-the-dataset",
+    "title": "Penguin Body Mass Ratio by Species (R)",
+    "section": "Dropping out the NA’s in the dataset",
+    "text": "Dropping out the NA’s in the dataset\n\npenguins_clean &lt;- penguins |&gt; \n  drop_na(body_mass, flipper_len, species, sex)\n\nsummary(penguins_clean)\n\n      species          island       bill_len        bill_dep      flipper_len \n Adelie   :146   Biscoe   :163   Min.   :32.10   Min.   :13.10   Min.   :172  \n Chinstrap: 68   Dream    :123   1st Qu.:39.50   1st Qu.:15.60   1st Qu.:190  \n Gentoo   :119   Torgersen: 47   Median :44.50   Median :17.30   Median :197  \n                                 Mean   :43.99   Mean   :17.16   Mean   :201  \n                                 3rd Qu.:48.60   3rd Qu.:18.70   3rd Qu.:213  \n                                 Max.   :59.60   Max.   :21.50   Max.   :231  \n   body_mass        sex           year     \n Min.   :2700   female:165   Min.   :2007  \n 1st Qu.:3550   male  :168   1st Qu.:2007  \n Median :4050                Median :2008  \n Mean   :4207                Mean   :2008  \n 3rd Qu.:4775                3rd Qu.:2009  \n Max.   :6300                Max.   :2009"
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.",
+    "href": "posts/penguins-r/index.html#some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.",
+    "title": "Penguin Body Mass Ratio by Species (R)",
+    "section": "Some grouped analysis on the mean mass and flipper length for each species and sex.",
+    "text": "Some grouped analysis on the mean mass and flipper length for each species and sex.\n\npenguins_grouped &lt;- penguins_clean |&gt; \n  group_by(species, sex) |&gt; \n  summarise(\n    mean_mass = mean(body_mass),\n    mean_flipper = mean(flipper_len),\n    n = n()\n  )\n\npenguins_grouped\n\n# A tibble: 6 × 5\n# Groups:   species [3]\n  species   sex    mean_mass mean_flipper     n\n  &lt;fct&gt;     &lt;fct&gt;      &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;\n1 Adelie    female     3369.         188.    73\n2 Adelie    male       4043.         192.    73\n3 Chinstrap female     3527.         192.    34\n4 Chinstrap male       3939.         200.    34\n5 Gentoo    female     4680.         213.    58\n6 Gentoo    male       5485.         222.    61"
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#adding-a-new-column-for-mass-ratio-body-massflipper-length",
+    "href": "posts/penguins-r/index.html#adding-a-new-column-for-mass-ratio-body-massflipper-length",
+    "title": "Penguin Body Mass Ratio by Species (R)",
+    "section": "Adding a new column for Mass Ratio (Body Mass/Flipper Length)",
+    "text": "Adding a new column for Mass Ratio (Body Mass/Flipper Length)\n\npenguins_clean &lt;- penguins_clean |&gt; \n  mutate(mass_ratio = body_mass / flipper_len)\n\nhead(penguins_clean)\n\n  species    island bill_len bill_dep flipper_len body_mass    sex year\n1  Adelie Torgersen     39.1     18.7         181      3750   male 2007\n2  Adelie Torgersen     39.5     17.4         186      3800 female 2007\n3  Adelie Torgersen     40.3     18.0         195      3250 female 2007\n4  Adelie Torgersen     36.7     19.3         193      3450 female 2007\n5  Adelie Torgersen     39.3     20.6         190      3650   male 2007\n6  Adelie Torgersen     38.9     17.8         181      3625 female 2007\n  mass_ratio\n1   20.71823\n2   20.43011\n3   16.66667\n4   17.87565\n5   19.21053\n6   20.02762"
+  },
+  {
+    "objectID": "posts/penguins-r/index.html#box-plot-for-mass-ratio-of-penguins-by-species",
+    "href": "posts/penguins-r/index.html#box-plot-for-mass-ratio-of-penguins-by-species",
+    "title": "Penguin Body Mass Ratio by Species (R)",
+    "section": "Box Plot for Mass Ratio of penguins by species",
+    "text": "Box Plot for Mass Ratio of penguins by species\n\npenguins_clean |&gt; \n  ggplot(aes(x = species, y = mass_ratio)) +\n  geom_boxplot() +\n  labs(x = \"Species\", y = \"Mass Ratio\")\n\n\n\n\n\n\n\nFigure 1: Mass Ratio of penguins by species."
+  },
+  {
+    "objectID": "posts/penguins-r-py/index.html",
+    "href": "posts/penguins-r-py/index.html",
+    "title": "Penguin Body Mass Ratio by Species (R and Python)",
+    "section": "",
+    "text": "Data: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/penguins-r-py/index.html#r-dropping-out-the-nas-in-the-dataset",
+    "href": "posts/penguins-r-py/index.html#r-dropping-out-the-nas-in-the-dataset",
+    "title": "Penguin Body Mass Ratio by Species (R and Python)",
+    "section": "[R] Dropping out the NA’s in the dataset",
+    "text": "[R] Dropping out the NA’s in the dataset\n\npenguins_clean &lt;- penguins |&gt; \n  drop_na(body_mass, flipper_len, species, sex)\n\nsummary(penguins_clean)\n\n      species          island       bill_len        bill_dep      flipper_len \n Adelie   :146   Biscoe   :163   Min.   :32.10   Min.   :13.10   Min.   :172  \n Chinstrap: 68   Dream    :123   1st Qu.:39.50   1st Qu.:15.60   1st Qu.:190  \n Gentoo   :119   Torgersen: 47   Median :44.50   Median :17.30   Median :197  \n                                 Mean   :43.99   Mean   :17.16   Mean   :201  \n                                 3rd Qu.:48.60   3rd Qu.:18.70   3rd Qu.:213  \n                                 Max.   :59.60   Max.   :21.50   Max.   :231  \n   body_mass        sex           year     \n Min.   :2700   female:165   Min.   :2007  \n 1st Qu.:3550   male  :168   1st Qu.:2007  \n Median :4050                Median :2008  \n Mean   :4207                Mean   :2008  \n 3rd Qu.:4775                3rd Qu.:2009  \n Max.   :6300                Max.   :2009"
+  },
+  {
+    "objectID": "posts/penguins-r-py/index.html#python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.",
+    "href": "posts/penguins-r-py/index.html#python-some-grouped-analysis-on-the-mean-mass-and-flipper-length-for-each-species-and-sex.",
+    "title": "Penguin Body Mass Ratio by Species (R and Python)",
+    "section": "[Python] Some grouped analysis on the mean mass and flipper length for each species and sex.",
+    "text": "[Python] Some grouped analysis on the mean mass and flipper length for each species and sex.\n\npenguins_grouped = (\n    r.penguins_clean\n    .groupby([\"species\", \"sex\"])\n    .agg(\n        mean_mass=(\"body_mass\", \"mean\"),\n        mean_flipper=(\"flipper_len\", \"mean\"),\n        n=(\"body_mass\", \"count\")\n    )\n)\n\npenguins_grouped\n\n                    mean_mass  mean_flipper   n\nspecies   sex                                  \nAdelie    female  3368.835616    187.794521  73\n          male    4043.493151    192.410959  73\nChinstrap female  3527.205882    191.735294  34\n          male    3938.970588    199.911765  34\nGentoo    female  4679.741379    212.706897  58\n          male    5484.836066    221.540984  61"
+  },
+  {
+    "objectID": "posts/penguins-r-py/index.html#python-adding-a-new-column-for-mass-ratio-body-massflipper-length",
+    "href": "posts/penguins-r-py/index.html#python-adding-a-new-column-for-mass-ratio-body-massflipper-length",
+    "title": "Penguin Body Mass Ratio by Species (R and Python)",
+    "section": "[Python] Adding a new column for Mass Ratio (Body Mass/Flipper Length)",
+    "text": "[Python] Adding a new column for Mass Ratio (Body Mass/Flipper Length)\n\npenguins_py = r.penguins_clean.copy()\npenguins_py[\"mass_ratio\"] = penguins_py[\"body_mass\"] / penguins_py[\"flipper_len\"]\n\npenguins_py.head()\n\n  species     island  bill_len  bill_dep  ...  body_mass     sex  year  mass_ratio\n0  Adelie  Torgersen      39.1      18.7  ...       3750    male  2007   20.718232\n1  Adelie  Torgersen      39.5      17.4  ...       3800  female  2007   20.430108\n2  Adelie  Torgersen      40.3      18.0  ...       3250  female  2007   16.666667\n3  Adelie  Torgersen      36.7      19.3  ...       3450  female  2007   17.875648\n4  Adelie  Torgersen      39.3      20.6  ...       3650    male  2007   19.210526\n\n[5 rows x 9 columns]"
+  },
+  {
+    "objectID": "posts/penguins-r-py/index.html#r-box-plot-for-mass-ratio-of-penguins-by-species",
+    "href": "posts/penguins-r-py/index.html#r-box-plot-for-mass-ratio-of-penguins-by-species",
+    "title": "Penguin Body Mass Ratio by Species (R and Python)",
+    "section": "[R] Box Plot for Mass Ratio of penguins by species",
+    "text": "[R] Box Plot for Mass Ratio of penguins by species\n\npy$penguins_py |&gt;\n  ggplot(aes(x = species, y = mass_ratio)) +\n  geom_boxplot() +\n  labs(x = \"Species\", y = \"Mass Ratio\")\n\n\n\n\n\n\n\nFigure 1: Mass Ratio of penguins by species."
   }
 ]
