@@ -62,7 +62,7 @@ renv::restore()
 uv run quarto preview
 ```
 
-**Ctrl + C** to exit the preview
+**Ctrl + C** in the Git Bash session to exit the preview
 
 ### Step 6: Render the site (this renders the site into the docs folder where github picks it up)
 ```{git bash}
