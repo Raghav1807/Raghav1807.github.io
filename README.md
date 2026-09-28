@@ -69,6 +69,8 @@ uv run quarto preview
 uv run quarto render
 ```
 
+Double click the file 'index.html' inside the 'docs' folder to open the rendered version.
+
 ### (Only for Owner) Step 7: Push to Github after changes
 ```{git bash}
 git add --all
@@ -79,3 +81,8 @@ git commit -m "<Commit Message>"
 ```{git bash}
 git push origin main
 ```
+
+## Data Used
+The Palmer Penguins dataset is used in 3 blog posts. It is loaded with the R and Python packages. No extra file stored locally or from the internet is required.
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/), Palmer Station Antarctica LTER.
